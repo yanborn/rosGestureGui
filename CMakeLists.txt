@@ -9,6 +9,7 @@ add_compile_options(-std=c++11)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
     roscpp
+    qt_build
 )
 
 ## System dependencies are found with CMake's conventions
@@ -107,6 +108,35 @@ catkin_package(
 #  DEPENDS system_lib
 )
 
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+##############################################################################
+# Qt Environment
+##############################################################################
+
+# this comes from qt_build's qt-ros.cmake which is automatically
+# included via the dependency call in package.xml
+rosbuild_prepare_qt4(QtCore QtGui) # Add the appropriate components to the component list here
+
+##############################################################################
+# Sections
+##############################################################################
+
+file(GLOB QT_FORMS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ui/*.ui)
+file(GLOB_RECURSE QT_MOC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} FOLLOW_SYMLINKS include/*.hpp)
+
+QT4_ADD_RESOURCES(QT_RESOURCES_CPP ${QT_RESOURCES})
+QT4_WRAP_UI(QT_FORMS_HPP ${QT_FORMS})
+QT4_WRAP_CPP(QT_MOC_HPP ${QT_MOC})
+
+##############################################################################
+# Sources
+##############################################################################
+
+file(GLOB_RECURSE QT_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} FOLLOW_SYMLINKS src/*.cpp)
+
 ###########
 ## Build ##
 ###########
@@ -131,7 +161,13 @@ ${catkin_INCLUDE_DIRS}
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(${PROJECT_NAME}_node src/gestureListener.cpp)
+add_executable(${PROJECT_NAME}_node
+    src/gestureListener.cpp
+    ${QT_SOURCES}
+    ${QT_RESOURCES_CPP}
+    ${QT_FORMS_HPP}
+    ${QT_MOC_HPP}
+    )
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -146,6 +182,7 @@ add_executable(${PROJECT_NAME}_node src/gestureListener.cpp)
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
+  ${QT_LIBRARIES}
 )
 
 #############
