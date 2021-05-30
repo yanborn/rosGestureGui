@@ -12,15 +12,16 @@ main(int argc, char **argv)
 
   ROS_INFO("ROS Gesture GUI started!");
 
-  ros::Subscriber sub = nh.subscribe("gestureGui", 1000, guiHandler::handleCallback);
-
-  ros::spin();
-
   QApplication app(argc, argv);
 
-  gesturegui gui;
+  guiHandler handler;
 
-  gui.show();
-  return app.exec();
+  handler.gui.show();
+
+  ros::Subscriber sub = nh.subscribe("gestureGui", 1000, handler.handleCallback);
+  ros::spin();
+  app.exec();
+
+  return 1;
 
 }

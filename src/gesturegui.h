@@ -15,6 +15,8 @@ public:
   explicit gesturegui(QWidget *parent = nullptr);
   ~gesturegui();
 
+  //int select_left_combo();
+
 private:
   Ui::gesturegui *ui;
 };
