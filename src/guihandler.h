@@ -4,23 +4,34 @@
 #include "gesturegui.h"
 #include "std_msgs/String.h"
 
-#include <QApplication>
+#ifndef Q_MOC_RUN
+#include <ros/ros.h>
+#endif
+#include <QThread>
 
-class guiHandler
+class guiHandler : public QThread
 {
+  Q_OBJECT
 public:
   //Constructor
-  guiHandler();
+  guiHandler(int argc, char** argv);
 
   //Constructor
-  ~guiHandler() = default;
+  virtual ~guiHandler();
+
+  bool init();
+  void run();
 
   //Callback to register with the subscriber node
   static void handleCallback(const std_msgs::String::ConstPtr& msg);
 
-  gesturegui gui;
-private:
+Q_SIGNALS:
+  void rosShutdown();
 
+private:
+  int init_argc;
+  char** init_argv;
+  ros::Subscriber gesture_subscriber;
   static const std::string leftDropdownClicked;
 };
 
