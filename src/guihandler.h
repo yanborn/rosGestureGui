@@ -1,6 +1,7 @@
 #ifndef GUIHANDLER_H
 #define GUIHANDLER_H
 
+#include "cstring"
 #include "gesturegui.h"
 #include "std_msgs/String.h"
 
@@ -23,16 +24,19 @@ public:
   void run();
 
   //Callback to register with the subscriber node
-  static void handleCallback(const std_msgs::String::ConstPtr& msg);
+  void handleCallback(const std_msgs::String::ConstPtr& msg);
 
 Q_SIGNALS:
   void rosShutdown();
+  void leftDropdownClicked();
 
 private:
   int init_argc;
   char** init_argv;
   ros::Subscriber gesture_subscriber;
-  static const std::string leftDropdownClicked;
+  static const std::string leftDropdownClickedMsg;
+  static const std::string nodeName;
+  static const std::uint32_t nodeQueueSize;
 };
 
 #endif // GUIHANDLER_H

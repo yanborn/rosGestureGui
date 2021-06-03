@@ -1,11 +1,14 @@
 #include "gesturegui.h"
 #include "guihandler.h"
 #include "ros/console.h"
+#include "ros/transport_hints.h"
 
 #include <ros/ros.h>
 #include <QApplication>
 
-const std::string guiHandler::leftDropdownClicked{"left"};
+const std::string guiHandler::leftDropdownClickedMsg{"left"};
+const std::string guiHandler::nodeName{"gestureGui"};
+const std::uint32_t guiHandler::nodeQueueSize{10};
 
 guiHandler::guiHandler(int argc, char** argv):
   init_argc(argc),
@@ -31,7 +34,8 @@ guiHandler::init()
   }
   ros::start();
   ros::NodeHandle n;
-  gesture_subscriber = n.subscribe("gestureGui", 1000, handleCallback);
+  ros::TransportHints th;
+  gesture_subscriber = n.subscribe(nodeName, nodeQueueSize, &guiHandler::handleCallback, this);
   start();
   return true;
 }
@@ -52,12 +56,14 @@ guiHandler::run()
   Q_EMIT rosShutdown();
 }
 
-void guiHandler::handleCallback(const std_msgs::String::ConstPtr& msg)
+void
+guiHandler::handleCallback(const std_msgs::String::ConstPtr& msg)
 {
   ROS_INFO_STREAM("Message reveiced: " << msg->data.c_str());
 
-  if(msg->data.c_str() == leftDropdownClicked) {
+  if(msg->data.c_str() == leftDropdownClickedMsg) {
     ROS_INFO_STREAM("I handled the message");
+    Q_EMIT leftDropdownClicked();
   }
   else {
     ROS_ERROR_STREAM("Message not handled by guiHandler");

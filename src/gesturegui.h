@@ -20,6 +20,7 @@ public:
   //int select_left_combo();
 public Q_SLOTS:
   void on_connect_button_clicked();
+  void on_left_dropdown_clicked();
 
 private:
   Ui::gesturegui *ui;
