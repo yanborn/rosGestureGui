@@ -13,8 +13,10 @@ gesturegui::gesturegui(int argc, char** argv, QWidget *parent) :
   ui->setupUi(this);
 
   QObject::connect(&guiHand, SIGNAL(rosShutdown()), this, SLOT(close()));
-  QObject::connect(&guiHand, SIGNAL(leftDropdownClicked()), this, SLOT(left_dropdown_click()));
-  QObject::connect(&guiHand, SIGNAL(rightDropdownClicked()), this, SLOT(right_dropdown_click()));
+  QObject::connect(&guiHand, SIGNAL(leftDropdownHighlighted()), this, SLOT(leftDropdownHighlighted()));
+  QObject::connect(&guiHand, SIGNAL(leftDropdownClicked()), this, SLOT(leftDropdownClicked()));
+  QObject::connect(&guiHand, SIGNAL(rightDropdownHighlighted()), this, SLOT(rightDropdownHighlighted()));
+  QObject::connect(&guiHand, SIGNAL(rightDropdownClicked()), this, SLOT(rightDropdownClicked()));
   QObject::connect(&guiHand, SIGNAL(sliderUp()), this, SLOT(sliderUp()));
   QObject::connect(&guiHand, SIGNAL(sliderDown()), this, SLOT(sliderDown()));
   QObject::connect(&guiHand, SIGNAL(closeGui()), this, SLOT(close()));
@@ -34,18 +36,38 @@ gesturegui::on_connect_button_clicked()
 }
 
 void
-gesturegui::left_dropdown_click()
+gesturegui::leftDropdownHighlighted()
 {
+  ROS_INFO_STREAM("Highlighting left dropdown menu");
+  ui->right_dropdown->setStyleSheet("font-weight: normal;");
+  ui->left_dropdown->setStyleSheet("font-weight: bold;");
+}
+
+void
+gesturegui::leftDropdownClicked()
+{
+  ROS_INFO_STREAM("Clicking on left dropdown menu");
   ui->left_dropdown->showPopup();
   ui->right_dropdown->hidePopup();
 }
 
 void
-gesturegui::right_dropdown_click()
+gesturegui::rightDropdownHighlighted()
 {
+  ROS_INFO_STREAM("Highlighting right dropdown menu");
+  ui->left_dropdown->setStyleSheet("font-weight: normal;");
+  ui->right_dropdown->setStyleSheet("font-weight: bold;");
+}
+
+void
+gesturegui::rightDropdownClicked()
+{
+  ROS_INFO_STREAM("Clicking on right dropdown menu");
   ui->right_dropdown->showPopup();
   ui->left_dropdown->hidePopup();
 }
+
+
 
 void
 gesturegui::sliderUp()

@@ -21,8 +21,10 @@ public:
   //int select_left_combo();
 public Q_SLOTS:
   void on_connect_button_clicked();
-  void left_dropdown_click();
-  void right_dropdown_click();
+  void leftDropdownHighlighted();
+  void leftDropdownClicked();
+  void rightDropdownHighlighted();
+  void rightDropdownClicked();
   void sliderUp();
   void sliderDown();
 

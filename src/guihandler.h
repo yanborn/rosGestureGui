@@ -28,23 +28,32 @@ public:
 
 Q_SIGNALS:
   void rosShutdown();
+  void leftDropdownHighlighted();
   void leftDropdownClicked();
+  void rightDropdownHighlighted();
   void rightDropdownClicked();
   void closeGui();
   void sliderUp();
   void sliderDown();
 
 private:
+  //Topic listener object
+  ros::Subscriber gesture_subscriber;
+
+  //Initialization values
+  static constexpr std::uint32_t nodeQueueSize{1000};
   int init_argc;
   char** init_argv;
-  ros::Subscriber gesture_subscriber;
+
+  //Topic Messages
+  static const std::string leftDropdownHighlightedMsg;
   static const std::string leftDropdownClickedMsg;
+  static const std::string rightDropdownHighlightedMsg;
   static const std::string rightDropdownClickedMsg;
   static const std::string closeGuiMsg;
   static const std::string sliderUpMsg;
   static const std::string sliderDownMsg;
   static const std::string nodeName;
-  static constexpr std::uint32_t nodeQueueSize{1000};
 };
 
 #endif // GUIHANDLER_H

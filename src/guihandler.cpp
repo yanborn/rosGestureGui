@@ -6,7 +6,9 @@
 #include <ros/ros.h>
 #include <QApplication>
 
+const std::string guiHandler::leftDropdownHighlightedMsg{"leftHighlighted"};
 const std::string guiHandler::leftDropdownClickedMsg{"leftClicked"};
+const std::string guiHandler::rightDropdownHighlightedMsg{"rightHighlighted"};
 const std::string guiHandler::rightDropdownClickedMsg{"rightClicked"};
 const std::string guiHandler::closeGuiMsg{"closeGui"};
 const std::string guiHandler::sliderUpMsg{"sliderUp"};
@@ -91,6 +93,12 @@ guiHandler::handleCallback(const std_msgs::String::ConstPtr& msg)
   }
   else if(msg->data.c_str() == sliderDownMsg) {
     Q_EMIT sliderDown();
+  }
+  else if(msg->data.c_str() == leftDropdownHighlightedMsg) {
+    Q_EMIT leftDropdownHighlighted();
+  }
+  else if(msg->data.c_str() == rightDropdownHighlightedMsg) {
+    Q_EMIT rightDropdownHighlighted();
   }
   else {
     ROS_ERROR_STREAM("Message not handled by guiHandler");
