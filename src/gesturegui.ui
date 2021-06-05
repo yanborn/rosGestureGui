@@ -83,8 +83,20 @@
       <height>241</height>
      </rect>
     </property>
+    <property name="maximum">
+     <number>10</number>
+    </property>
+    <property name="singleStep">
+     <number>1</number>
+    </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
+    </property>
+    <property name="tickPosition">
+     <enum>QSlider::TicksBothSides</enum>
+    </property>
+    <property name="tickInterval">
+     <number>1</number>
     </property>
    </widget>
    <widget class="QPushButton" name="connect_button">

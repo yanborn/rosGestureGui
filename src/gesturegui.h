@@ -22,6 +22,9 @@ public:
 public Q_SLOTS:
   void on_connect_button_clicked();
   void left_dropdown_click();
+  void right_dropdown_click();
+  void sliderUp();
+  void sliderDown();
 
 private:
   Ui::gesturegui *ui;

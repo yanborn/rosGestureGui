@@ -29,12 +29,20 @@ public:
 Q_SIGNALS:
   void rosShutdown();
   void leftDropdownClicked();
+  void rightDropdownClicked();
+  void closeGui();
+  void sliderUp();
+  void sliderDown();
 
 private:
   int init_argc;
   char** init_argv;
   ros::Subscriber gesture_subscriber;
   static const std::string leftDropdownClickedMsg;
+  static const std::string rightDropdownClickedMsg;
+  static const std::string closeGuiMsg;
+  static const std::string sliderUpMsg;
+  static const std::string sliderDownMsg;
   static const std::string nodeName;
   static constexpr std::uint32_t nodeQueueSize{1000};
 };
