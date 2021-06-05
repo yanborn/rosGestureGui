@@ -18,7 +18,6 @@ public:
   explicit gesturegui(int argc, char** argv, QWidget *parent = nullptr);
   ~gesturegui();
 
-  //int select_left_combo();
 public Q_SLOTS:
   void on_connect_button_clicked();
   void leftDropdownHighlighted();
