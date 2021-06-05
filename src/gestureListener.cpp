@@ -7,9 +7,6 @@
 int
 main(int argc, char **argv)
 {
-  //ros::init(argc, argv, "gestureListener");
-  //ros::NodeHandle nh;
-
   ROS_INFO("ROS Gesture GUI started!");
 
   QApplication app(argc, argv);
