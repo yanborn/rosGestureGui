@@ -3,6 +3,7 @@
 
 #include "guihandler.h"
 
+#include <QObject>
 #include <QtGui/QMainWindow>
 
 namespace Ui {
@@ -20,11 +21,11 @@ public:
   //int select_left_combo();
 public Q_SLOTS:
   void on_connect_button_clicked();
-  void on_left_dropdown_clicked();
+  void left_dropdown_click();
 
 private:
   Ui::gesturegui *ui;
-  guiHandler gui;
+  guiHandler guiHand;
 };
 
 #endif // GESTUREGUI_H

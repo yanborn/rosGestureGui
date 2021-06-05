@@ -6,12 +6,12 @@
 gesturegui::gesturegui(int argc, char** argv, QWidget *parent) :
   QMainWindow(parent),
   ui(new Ui::gesturegui),
-  gui(argc, argv)
+  guiHand(argc, argv)
 {
   ui->setupUi(this);
 
-  QObject::connect(&gui, SIGNAL(rosShutdown()), this, SLOT(close()));
-  QObject::connect(&gui, SIGNAL(leftDropdownClicked()), this, SLOT(on_left_dropdown_clicked()));
+  QObject::connect(&guiHand, SIGNAL(rosShutdown()), this, SLOT(close()));
+  QObject::connect(&guiHand, SIGNAL(leftDropdownClicked()), this, SLOT(left_dropdown_click()));
 }
 
 gesturegui::~gesturegui()
@@ -22,16 +22,12 @@ gesturegui::~gesturegui()
 void
 gesturegui::on_connect_button_clicked()
 {
-  if(!gui.init()) {
+  if(!guiHand.init()) {
     ROS_ERROR_STREAM("Error starting topic listener");
-  }
-  else {
-    gui.run();
   }
 }
 
 void
-gesturegui::on_left_dropdown_clicked()
+gesturegui::left_dropdown_click()
 {
-  ROS_INFO_STREAM("Signaltest");
 }

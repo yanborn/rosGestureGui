@@ -36,7 +36,7 @@ private:
   ros::Subscriber gesture_subscriber;
   static const std::string leftDropdownClickedMsg;
   static const std::string nodeName;
-  static const std::uint32_t nodeQueueSize;
+  static constexpr std::uint32_t nodeQueueSize{1000};
 };
 
 #endif // GUIHANDLER_H

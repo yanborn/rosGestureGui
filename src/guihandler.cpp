@@ -8,7 +8,6 @@
 
 const std::string guiHandler::leftDropdownClickedMsg{"left"};
 const std::string guiHandler::nodeName{"gestureGui"};
-const std::uint32_t guiHandler::nodeQueueSize{10};
 
 guiHandler::guiHandler(int argc, char** argv):
   init_argc(argc),
@@ -34,7 +33,6 @@ guiHandler::init()
   }
   ros::start();
   ros::NodeHandle n;
-  ros::TransportHints th;
   gesture_subscriber = n.subscribe(nodeName, nodeQueueSize, &guiHandler::handleCallback, this);
   start();
   return true;
