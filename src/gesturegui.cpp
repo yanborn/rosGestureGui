@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QComboBox>
+#include <QPalette>
 #include <QSlider>
 
 gesturegui::gesturegui(int argc, char** argv, QWidget *parent) :
@@ -11,6 +12,11 @@ gesturegui::gesturegui(int argc, char** argv, QWidget *parent) :
   guiHand(argc, argv)
 {
   ui->setupUi(this);
+
+  //Set initial style for GUI Widgets
+  ui->right_dropdown->setStyleSheet("background-color:white");
+  ui->left_dropdown->setStyleSheet("background-color:white");
+  ui->slider_frame->setStyleSheet("background-color:white");
 
   QObject::connect(&guiHand, SIGNAL(rosShutdown()), this, SLOT(close()));
   QObject::connect(&guiHand, SIGNAL(leftDropdownHighlighted()), this, SLOT(leftDropdownHighlighted()));
@@ -39,8 +45,9 @@ void
 gesturegui::leftDropdownHighlighted()
 {
   ROS_INFO_STREAM("Highlighting left dropdown menu");
-  ui->right_dropdown->setStyleSheet("font-weight: normal;");
-  ui->left_dropdown->setStyleSheet("font-weight: bold;");
+  ui->left_dropdown->setStyleSheet("background-color:grey");
+  ui->right_dropdown->setStyleSheet("background-color:white");
+  ui->slider_frame->setStyleSheet("background-color:white");
 }
 
 void
@@ -55,8 +62,9 @@ void
 gesturegui::rightDropdownHighlighted()
 {
   ROS_INFO_STREAM("Highlighting right dropdown menu");
-  ui->left_dropdown->setStyleSheet("font-weight: normal;");
-  ui->right_dropdown->setStyleSheet("font-weight: bold;");
+  ui->right_dropdown->setStyleSheet("background-color:grey");
+  ui->left_dropdown->setStyleSheet("background-color:white");
+  ui->slider_frame->setStyleSheet("background-color:white");
 }
 
 void
@@ -66,8 +74,6 @@ gesturegui::rightDropdownClicked()
   ui->right_dropdown->showPopup();
   ui->left_dropdown->hidePopup();
 }
-
-
 
 void
 gesturegui::sliderUp()

@@ -112,6 +112,30 @@
      <string>Connect</string>
     </property>
    </widget>
+   <widget class="QFrame" name="slider_frame">
+    <property name="geometry">
+     <rect>
+      <x>539</x>
+      <y>9</y>
+      <width>41</width>
+      <height>261</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <property name="lineWidth">
+     <number>0</number>
+    </property>
+   </widget>
+   <zorder>slider_frame</zorder>
+   <zorder>left_dropdown</zorder>
+   <zorder>right_dropdown</zorder>
+   <zorder>slider</zorder>
+   <zorder>connect_button</zorder>
   </widget>
  </widget>
  <resources/>
