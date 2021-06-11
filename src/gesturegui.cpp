@@ -58,17 +58,27 @@ gesturegui::leftDropdownHighlighted()
 {
   ROS_INFO_STREAM("Highlighting left dropdown menu");
 
-  if(!leftDropdownIsHighlighted && !rightDropdownIsClicked && !sliderIsClicked) {
-    leftDropdownIsHighlighted = true;
-    rightDropdownIsHighlighted = false;
-    sliderIsHighlighted = false;
-    ui->left_dropdown->setStyleSheet(highlighted);
-    ui->right_dropdown->setStyleSheet(notHighlighted);
-    ui->slider_frame->setStyleSheet(notHighlighted);
+  if(leftDropdownIsHighlighted) {
+    ROS_WARN_STREAM("Left drop down is already highlighted");
+    return;
   }
-  else {
-    ROS_WARN_STREAM("Left dropdown already highlighted or other widget is still clicked");
+
+  if(rightDropdownIsClicked) {
+    ROS_WARN_STREAM("Right dropdown is still clicked");
+    return;
   }
+
+  if(sliderIsClicked) {
+    ROS_WARN_STREAM("Slider is still clicked");
+    return;
+  }
+
+  leftDropdownIsHighlighted = true;
+  rightDropdownIsHighlighted = false;
+  sliderIsHighlighted = false;
+  ui->left_dropdown->setStyleSheet(highlighted);
+  ui->right_dropdown->setStyleSheet(notHighlighted);
+  ui->slider_frame->setStyleSheet(notHighlighted);
 }
 
 void
@@ -76,14 +86,14 @@ gesturegui::leftDropdownClicked()
 {
   ROS_INFO_STREAM("Clicking on left dropdown menu");
 
-  if(leftDropdownIsHighlighted && !rightDropdownIsClicked && !sliderIsClicked) {
-    ui->left_dropdown->showPopup();
-    ui->right_dropdown->hidePopup();
-    leftDropdownIsClicked=!leftDropdownIsClicked;
-  }
-  else {
+  if(!leftDropdownIsHighlighted) {
     ROS_WARN_STREAM("Left dropdown is not highlighted. Highlight before clicking on the left drop down.");
+    return;
   }
+
+  ui->left_dropdown->showPopup();
+  ui->right_dropdown->hidePopup();
+  leftDropdownIsClicked=!leftDropdownIsClicked;
 }
 
 void
@@ -91,96 +101,114 @@ gesturegui::rightDropdownHighlighted()
 {
   ROS_INFO_STREAM("Highlighting right dropdown menu");
 
-  if(!rightDropdownIsHighlighted && !leftDropdownIsClicked && !sliderIsClicked) {
-    leftDropdownIsHighlighted = false;
-    rightDropdownIsHighlighted = true;
-    sliderIsHighlighted = false;
-    ui->right_dropdown->setStyleSheet(highlighted);
-    ui->left_dropdown->setStyleSheet(notHighlighted);
-    ui->slider_frame->setStyleSheet(notHighlighted);
-  }
-  else {
-    ROS_WARN_STREAM("Right dropdown already highlighted or other widget is still clicked");
+  if(rightDropdownIsHighlighted) {
+    ROS_WARN_STREAM("Right drop down is already highlighted");
+    return;
   }
 
+  if(leftDropdownIsClicked) {
+    ROS_WARN_STREAM("Left dropdown is still clicked");
+    return;
+  }
+
+  if(sliderIsClicked) {
+    ROS_WARN_STREAM("Slider is still clicked");
+    return;
+  }
+
+  leftDropdownIsHighlighted = false;
+  rightDropdownIsHighlighted = true;
+  sliderIsHighlighted = false;
+  ui->right_dropdown->setStyleSheet(highlighted);
+  ui->left_dropdown->setStyleSheet(notHighlighted);
+  ui->slider_frame->setStyleSheet(notHighlighted);
 }
 
 void
 gesturegui::rightDropdownClicked()
 {
   ROS_INFO_STREAM("Clicking on right dropdown menu");
-  if(rightDropdownIsHighlighted) {
-    ui->right_dropdown->showPopup();
-    ui->left_dropdown->hidePopup();
-    rightDropdownIsClicked=!rightDropdownIsClicked;
-  }
-  else {
+  if(!rightDropdownIsHighlighted) {
     ROS_WARN_STREAM("Right dropdown is not highlighted. Highlight before clicking on the right drop down.");
   }
+
+  ui->right_dropdown->showPopup();
+  ui->left_dropdown->hidePopup();
+  rightDropdownIsClicked=!rightDropdownIsClicked;
 }
 
 void
 gesturegui::sliderHighlighted()
 {
   ROS_INFO_STREAM("Highlighting slider");
+  if(sliderIsHighlighted) {
+    ROS_WARN_STREAM("Slider is already highlighted");
+    return;
+  }
 
-  if(!sliderIsHighlighted && !leftDropdownIsClicked && !rightDropdownIsClicked) {
-    leftDropdownIsHighlighted = false;
-    rightDropdownIsHighlighted = false;
-    sliderIsHighlighted = true;
-    ui->right_dropdown->setStyleSheet(notHighlighted);
-    ui->left_dropdown->setStyleSheet(notHighlighted);
-    ui->slider_frame->setStyleSheet(highlighted);
+  if(leftDropdownIsClicked) {
+    ROS_WARN_STREAM("Left dropdown is still clicked");
+    return;
   }
-  else {
-    ROS_WARN_STREAM("Slider is already highlighted or other Widget is still clicked");
+
+  if(rightDropdownIsClicked) {
+    ROS_WARN_STREAM("Right dropdown is still clicked");
+    return;
   }
+
+  leftDropdownIsHighlighted = false;
+  rightDropdownIsHighlighted = false;
+  sliderIsHighlighted = true;
+  ui->right_dropdown->setStyleSheet(notHighlighted);
+  ui->left_dropdown->setStyleSheet(notHighlighted);
+  ui->slider_frame->setStyleSheet(highlighted);
 }
 
 void
 gesturegui::sliderClicked()
 {
   ROS_INFO_STREAM("Clicking on slider");
-  if(sliderIsHighlighted)
+
+  if(!sliderIsHighlighted)
   {
-    sliderIsClicked=!sliderIsClicked;
-  }
-  else {
     ROS_WARN_STREAM("Slider is not highlighted. Highlight before clicking on the slider.");
+    return;
   }
+
+  sliderIsClicked=!sliderIsClicked;
 }
 
 void
 gesturegui::sliderUp()
 {
   ROS_INFO_STREAM("Setting slider one tick up");
-  if(sliderIsClicked) {
-    if(ui->slider->value() < ui->slider->maximum()) {
-      ui->slider->setValue(ui->slider->value()+1);
-    }
-    else {
-      ROS_WARN_STREAM("Slider already has maximum value");
-    }
-  }
-  else {
+  if(!sliderIsClicked) {
     ROS_WARN_STREAM("Slider is not clicked. Click on slider before setting it one tick up");
+    return;
   }
+
+  if(ui->slider->value() == ui->slider->maximum()) {
+    ROS_WARN_STREAM("Slider already has maximum value");
+    return;
+  }
+
+  ui->slider->setValue(ui->slider->value()+1);
 }
 
 void
 gesturegui::sliderDown()
 {
   ROS_INFO_STREAM("Setting slider one tick down");
-  if(sliderIsClicked) {
-    if(ui->slider->value() > ui->slider->minimum()) {
-      ui->slider->setValue(ui->slider->value()-1);
-    }
-    else {
-      ROS_WARN_STREAM("Slider already has minimum value");
-    }
-  }
-  else {
+  if(!sliderIsClicked) {
     ROS_WARN_STREAM("Slider is not clicked. Click on slider before setting it one tick down");
+    return;
   }
+
+  if(ui->slider->value() == ui->slider->minimum()) {
+    ROS_WARN_STREAM("Slider already has minimum value");
+    return;
+  }
+
+  ui->slider->setValue(ui->slider->value()-1);
 }
 
