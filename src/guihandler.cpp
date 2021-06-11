@@ -10,9 +10,12 @@ const std::string guiHandler::leftDropdownHighlightedMsg{"leftHighlighted"};
 const std::string guiHandler::leftDropdownClickedMsg{"leftClicked"};
 const std::string guiHandler::rightDropdownHighlightedMsg{"rightHighlighted"};
 const std::string guiHandler::rightDropdownClickedMsg{"rightClicked"};
-const std::string guiHandler::closeGuiMsg{"closeGui"};
+const std::string guiHandler::sliderHighlightedMsg{"sliderHighlighted"};
+const std::string guiHandler::sliderClickedMsg{"sliderClicked"};
 const std::string guiHandler::sliderUpMsg{"sliderUp"};
 const std::string guiHandler::sliderDownMsg{"sliderDown"};
+const std::string guiHandler::closeGuiMsg{"closeGui"};
+
 const std::string guiHandler::nodeName{"gestureGui"};
 
 guiHandler::guiHandler(int argc, char** argv):
@@ -99,6 +102,12 @@ guiHandler::handleCallback(const std_msgs::String::ConstPtr& msg)
   }
   else if(msg->data.c_str() == rightDropdownHighlightedMsg) {
     Q_EMIT rightDropdownHighlighted();
+  }
+  else if(msg->data.c_str() == sliderHighlightedMsg) {
+    Q_EMIT sliderHighlighted();
+  }
+  else if(msg->data.c_str() == sliderClickedMsg) {
+    Q_EMIT sliderClicked();
   }
   else {
     ROS_ERROR_STREAM("Message not handled by guiHandler");

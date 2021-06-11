@@ -32,9 +32,12 @@ Q_SIGNALS:
   void leftDropdownClicked();
   void rightDropdownHighlighted();
   void rightDropdownClicked();
-  void closeGui();
+  void sliderHighlighted();
+  void sliderClicked();
   void sliderUp();
   void sliderDown();
+
+  void closeGui();
 
 private:
   //Topic listener object
@@ -50,9 +53,12 @@ private:
   static const std::string leftDropdownClickedMsg;
   static const std::string rightDropdownHighlightedMsg;
   static const std::string rightDropdownClickedMsg;
-  static const std::string closeGuiMsg;
+  static const std::string sliderHighlightedMsg;
+  static const std::string sliderClickedMsg;
   static const std::string sliderUpMsg;
   static const std::string sliderDownMsg;
+  static const std::string closeGuiMsg;
+
   static const std::string nodeName;
 };
 

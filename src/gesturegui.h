@@ -4,6 +4,7 @@
 #include "guihandler.h"
 
 #include <QObject>
+#include <QString>
 #include <QtGui/QMainWindow>
 
 namespace Ui {
@@ -24,12 +25,23 @@ public Q_SLOTS:
   void leftDropdownClicked();
   void rightDropdownHighlighted();
   void rightDropdownClicked();
+  void sliderHighlighted();
+  void sliderClicked();
   void sliderUp();
   void sliderDown();
 
 private:
   Ui::gesturegui *ui;
   guiHandler guiHand;
+
+  static bool leftDropdownIsHighlighted;
+  static bool leftDropdownIsClicked;
+  static bool rightDropdownIsHighlighted;
+  static bool rightDropdownIsClicked;
+  static bool sliderIsHighlighted;
+  static bool sliderIsClicked;
+  static QString const notHighlighted;
+  static QString const highlighted;
 };
 
 #endif // GESTUREGUI_H
