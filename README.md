@@ -5,11 +5,13 @@ ROS gesture gui for system integration project
 - [Ubuntu Xenial 16.04 LTS](http://releases.ubuntu.com/16.04/)
 - [ROS Kinetic Kame](http://wiki.ros.org/kinetic/Installation)
 - Working catkin environment with [catkin workspace](http://wiki.ros.org/ROS/Tutorials)
+- [Qt Version 4.8.7] (https://doc.qt.io/archives/qt-4.8/index.html) (Other Versions might also work)
 
 ## How to build
 Move to your catkin workspace.
+Place this package in the src folder of you catkin workspace.
 
-Run
+Run the following command in your catkin workspace
 > catkin_make
 
 The Ros package will be created. Make sure your workspace is setup properly.
@@ -21,3 +23,18 @@ Currently you have to run the following command
 
 ## How to use
 Click on the connect button to connect to the gestureGui topic.
+
+### Topic name
+- gestureGui _-> Topic to communicate with the GUI_
+
+### Supported messages
+The topics which are accepted and handled to control the GUI are the following:
+- leftHighlighted _-> For highlighting the left drop down menu_
+- leftClicked _-> For clicking on the left drop down menu_
+- rightHighlighted _-> For highlighting the right drop down menu_
+- rightClicked _-> For clicking on the right drop down menu_
+- sliderHighlighted _-> For highlighting the slider_
+- sliderClicked _-> For clicking on the slider_
+- sliderUp _-> For setting the slider one tick up_
+- sliderDown _-> For setting the slider one tick down_
+- closeGui _-> For closing the GUI_
