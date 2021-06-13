@@ -89,6 +89,7 @@ guiHandler::handleCallback(const std_msgs::String::ConstPtr& msg)
     Q_EMIT rightDropdownClicked();
   }
   else if(msg->data.c_str() == closeGuiMsg) {
+    ROS_INFO_STREAM("Closing gesture GUI");
     Q_EMIT closeGui();
   }
   else if(msg->data.c_str() == sliderUpMsg) {
