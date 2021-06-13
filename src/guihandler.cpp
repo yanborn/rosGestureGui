@@ -37,7 +37,7 @@ bool
 guiHandler::init()
 {
   ROS_INFO_STREAM("Start initializing guiHandler");
-  ros::init(init_argc,init_argv,"qtgui");
+  ros::init(init_argc,init_argv,"gestureGui");
 
   std::size_t counter{0};
 
