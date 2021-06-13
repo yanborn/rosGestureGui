@@ -5,7 +5,7 @@ ROS gesture gui for system integration project
 - [Ubuntu Xenial 16.04 LTS](http://releases.ubuntu.com/16.04/)
 - [ROS Kinetic Kame](http://wiki.ros.org/kinetic/Installation)
 - Working catkin environment with [catkin workspace](http://wiki.ros.org/ROS/Tutorials)
-- [Qt Version 4.8.7] (https://doc.qt.io/archives/qt-4.8/index.html) Other Versions might also work
+- [Qt Version 4.8.7](https://doc.qt.io/archives/qt-4.8/index.html) (Other Versions might also work)
 
 ## How to build
 Move to your catkin workspace.
