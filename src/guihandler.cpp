@@ -64,7 +64,7 @@ void
 guiHandler::run()
 {
   ROS_INFO_STREAM("Thread for listener on " << nodeName << " topic started");
-  ros::Rate loop_rate(10);
+  ros::Rate loop_rate(1);
 
   int count = 0;
   while(ros::ok())
