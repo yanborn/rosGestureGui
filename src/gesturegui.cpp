@@ -31,8 +31,12 @@ gesturegui::gesturegui(int argc, char** argv, QWidget *parent) :
   QObject::connect(&guiHand, SIGNAL(rosShutdown()), this, SLOT(close()));
   QObject::connect(&guiHand, SIGNAL(leftDropdownHighlighted()), this, SLOT(leftDropdownHighlighted()));
   QObject::connect(&guiHand, SIGNAL(leftDropdownClicked()), this, SLOT(leftDropdownClicked()));
+  QObject::connect(&guiHand, SIGNAL(leftDropdownDown()), this, SLOT(leftDropdownDown()));
+  QObject::connect(&guiHand, SIGNAL(leftDropdownUp()), this, SLOT(leftDropdownUp()));
   QObject::connect(&guiHand, SIGNAL(rightDropdownHighlighted()), this, SLOT(rightDropdownHighlighted()));
   QObject::connect(&guiHand, SIGNAL(rightDropdownClicked()), this, SLOT(rightDropdownClicked()));
+  QObject::connect(&guiHand, SIGNAL(rightDropdownDown()), this, SLOT(rightDropdownDown()));
+  QObject::connect(&guiHand, SIGNAL(rightDropdownUp()), this, SLOT(rightDropdownUp()));
   QObject::connect(&guiHand, SIGNAL(sliderHighlighted()), this, SLOT(sliderHighlighted()));
   QObject::connect(&guiHand, SIGNAL(sliderClicked()), this, SLOT(sliderClicked()));
   QObject::connect(&guiHand, SIGNAL(sliderUp()), this, SLOT(sliderUp()));
@@ -91,9 +95,57 @@ gesturegui::leftDropdownClicked()
     return;
   }
 
-  ui->left_dropdown->showPopup();
   ui->right_dropdown->hidePopup();
+
+  if(!leftDropdownIsClicked) {
+    ui->left_dropdown->showPopup();
+  }
+  else {
+    ui->left_dropdown->hidePopup();
+  }
   leftDropdownIsClicked=!leftDropdownIsClicked;
+}
+
+void
+gesturegui::leftDropdownDown()
+{
+  ROS_INFO_STREAM("Selecting the lower index");
+
+  if(!leftDropdownIsClicked) {
+    ROS_WARN_STREAM("Left dropdown is not clicked. Click before selecting the lower index of left drop down.");
+    return;
+  }
+
+  if(ui->left_dropdown->currentIndex() == ui->left_dropdown->count()-1) {
+    ui->left_dropdown->setCurrentIndex(0);
+  }
+  else {
+    ui->left_dropdown->setCurrentIndex(ui->left_dropdown->currentIndex()+1);
+  }
+
+  ui->left_dropdown->hidePopup();
+  leftDropdownIsClicked = false;
+}
+
+void
+gesturegui::leftDropdownUp()
+{
+  ROS_INFO_STREAM("Selecting the upper index");
+
+  if(!leftDropdownIsClicked) {
+    ROS_WARN_STREAM("Left dropdown is not clicked. Click before selecting the lower index of left drop down.");
+    return;
+  }
+
+  if(ui->left_dropdown->currentIndex() == 0) {
+    ui->left_dropdown->setCurrentIndex(ui->left_dropdown->count()-1);
+  }
+  else {
+    ui->left_dropdown->setCurrentIndex(ui->left_dropdown->currentIndex()-1);
+  }
+
+  ui->left_dropdown->hidePopup();
+  leftDropdownIsClicked = false;
 }
 
 void
@@ -130,11 +182,60 @@ gesturegui::rightDropdownClicked()
   ROS_INFO_STREAM("Clicking on right dropdown menu");
   if(!rightDropdownIsHighlighted) {
     ROS_WARN_STREAM("Right dropdown is not highlighted. Highlight before clicking on the right drop down.");
+    return;
   }
 
-  ui->right_dropdown->showPopup();
   ui->left_dropdown->hidePopup();
+
+  if(!rightDropdownIsClicked) {
+    ui->right_dropdown->showPopup();
+  }
+  else {
+    ui->right_dropdown->hidePopup();
+  }
   rightDropdownIsClicked=!rightDropdownIsClicked;
+}
+
+void
+gesturegui::rightDropdownDown()
+{
+  ROS_INFO_STREAM("Selecting the lower index");
+
+  if(!rightDropdownIsClicked) {
+    ROS_WARN_STREAM("right dropdown is not clicked. Click before selecting the lower index of right drop down.");
+    return;
+  }
+
+  if(ui->right_dropdown->currentIndex() == ui->right_dropdown->count()-1) {
+    ui->right_dropdown->setCurrentIndex(0);
+  }
+  else {
+    ui->right_dropdown->setCurrentIndex(ui->right_dropdown->currentIndex()+1);
+  }
+
+  ui->right_dropdown->hidePopup();
+  rightDropdownIsClicked = false;
+}
+
+void
+gesturegui::rightDropdownUp()
+{
+  ROS_INFO_STREAM("Selecting the upper index");
+
+  if(!rightDropdownIsClicked) {
+    ROS_WARN_STREAM("right dropdown is not clicked. Click before selecting the lower index of right drop down.");
+    return;
+  }
+
+  if(ui->right_dropdown->currentIndex() == 0) {
+    ui->right_dropdown->setCurrentIndex(ui->right_dropdown->count()-1);
+  }
+  else {
+    ui->right_dropdown->setCurrentIndex(ui->right_dropdown->currentIndex()-1);
+  }
+
+  ui->right_dropdown->hidePopup();
+  rightDropdownIsClicked = false;
 }
 
 void

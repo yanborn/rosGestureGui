@@ -30,8 +30,12 @@ Q_SIGNALS:
   void rosShutdown();
   void leftDropdownHighlighted();
   void leftDropdownClicked();
+  void leftDropdownDown();
+  void leftDropdownUp();
   void rightDropdownHighlighted();
   void rightDropdownClicked();
+  void rightDropdownDown();
+  void rightDropdownUp();
   void sliderHighlighted();
   void sliderClicked();
   void sliderUp();
@@ -51,8 +55,12 @@ private:
   //Topic Messages
   static const std::string leftDropdownHighlightedMsg;
   static const std::string leftDropdownClickedMsg;
+  static const std::string leftDropdownDownMsg;
+  static const std::string leftDropdownUpMsg;
   static const std::string rightDropdownHighlightedMsg;
   static const std::string rightDropdownClickedMsg;
+  static const std::string rightDropdownDownMsg;
+  static const std::string rightDropdownUpMsg;
   static const std::string sliderHighlightedMsg;
   static const std::string sliderClickedMsg;
   static const std::string sliderUpMsg;

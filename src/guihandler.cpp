@@ -8,8 +8,12 @@
 
 const std::string guiHandler::leftDropdownHighlightedMsg{"leftHighlighted"};
 const std::string guiHandler::leftDropdownClickedMsg{"leftClicked"};
+const std::string guiHandler::leftDropdownDownMsg{"leftDown"};
+const std::string guiHandler::leftDropdownUpMsg{"leftUp"};
 const std::string guiHandler::rightDropdownHighlightedMsg{"rightHighlighted"};
 const std::string guiHandler::rightDropdownClickedMsg{"rightClicked"};
+const std::string guiHandler::rightDropdownDownMsg{"rightDown"};
+const std::string guiHandler::rightDropdownUpMsg{"rightUp"};
 const std::string guiHandler::sliderHighlightedMsg{"sliderHighlighted"};
 const std::string guiHandler::sliderClickedMsg{"sliderClicked"};
 const std::string guiHandler::sliderUpMsg{"sliderUp"};
@@ -64,7 +68,7 @@ void
 guiHandler::run()
 {
   ROS_INFO_STREAM("Thread for listener on " << nodeName << " topic started");
-  ros::Rate loop_rate(0.5);
+  ros::Rate loop_rate(1.5);
 
   int count = 0;
   while(ros::ok())
@@ -109,6 +113,18 @@ guiHandler::handleCallback(const std_msgs::String::ConstPtr& msg)
   }
   else if(msg->data.c_str() == sliderClickedMsg) {
     Q_EMIT sliderClicked();
+  }
+  else if(msg->data.c_str() == leftDropdownDownMsg) {
+    Q_EMIT leftDropdownDown();
+  }
+  else if(msg->data.c_str() == leftDropdownUpMsg) {
+    Q_EMIT leftDropdownUp();
+  }
+  else if(msg->data.c_str() == rightDropdownDownMsg) {
+    Q_EMIT rightDropdownDown();
+  }
+  else if(msg->data.c_str() == rightDropdownUpMsg) {
+    Q_EMIT rightDropdownUp();
   }
   else {
     ROS_ERROR_STREAM("Message not handled by guiHandler");

@@ -23,8 +23,12 @@ public Q_SLOTS:
   void on_connect_button_clicked();
   void leftDropdownHighlighted();
   void leftDropdownClicked();
+  void leftDropdownDown();
+  void leftDropdownUp();
   void rightDropdownHighlighted();
   void rightDropdownClicked();
+  void rightDropdownDown();
+  void rightDropdownUp();
   void sliderHighlighted();
   void sliderClicked();
   void sliderUp();
