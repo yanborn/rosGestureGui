@@ -7,6 +7,11 @@ ROS gesture gui for system integration project
 - Working catkin environment with [catkin workspace](http://wiki.ros.org/ROS/Tutorials)
 - [Qt Version 4.8.7](https://doc.qt.io/archives/qt-4.8/index.html) (Other Versions might also work)
 
+## Required ROS Packages
+- [Openni launch package to get the kinect running](http://wiki.ros.org/openni_launch)
+- [Openni tracker package to get tf data](http://wiki.ros.org/openni_tracker)
+- [rosGestureIdentifier package for the gesture identification](https://github.com/yanborn/rosGestureIdentifier/tree/master)
+
 ## How to build
 Move to your catkin workspace.
 Place this package in the src folder of you catkin workspace.

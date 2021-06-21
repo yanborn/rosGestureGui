@@ -1,5 +1,4 @@
 #include "gesturegui.h"
-#include "guihandler.h"
 
 #include <QApplication>
 #include <ros/ros.h>
