@@ -12,6 +12,9 @@
 #include <QComboBox>
 #include <QPalette>
 #include <QSlider>
+#include <ros/ros.h>
+#include <std_msgs/String.h>
+#include <string>
 
 bool gesturegui::leftDropdownIsHighlighted{false};
 bool gesturegui::leftDropdownIsClicked{false};
@@ -49,6 +52,10 @@ gesturegui::gesturegui(int argc, char** argv, QWidget *parent) :
   QObject::connect(&guiHand, SIGNAL(sliderUp()), this, SLOT(sliderUp()));
   QObject::connect(&guiHand, SIGNAL(sliderDown()), this, SLOT(sliderDown()));
   QObject::connect(&guiHand, SIGNAL(closeGui()), this, SLOT(close()));
+
+  ros::init(argc, argv, "guiResultNode");
+  ros::NodeHandle nh;
+  guiResultPublisher = nh.advertise<std_msgs::String>("guiResult", 1);
 }
 
 gesturegui::~gesturegui()
@@ -132,6 +139,11 @@ gesturegui::leftDropdownDown()
 
   ui->left_dropdown->hidePopup();
   leftDropdownIsClicked = false;
+
+  ROS_INFO_STREAM("Publishing current left drop down text");
+  std_msgs::String msg;
+  msg.data = ui->left_dropdown->currentText().toStdString();
+  guiResultPublisher.publish(msg);
 }
 
 void
@@ -153,6 +165,11 @@ gesturegui::leftDropdownUp()
 
   ui->left_dropdown->hidePopup();
   leftDropdownIsClicked = false;
+
+  ROS_INFO_STREAM("Publishing current left drop down text");
+  std_msgs::String msg;
+  msg.data = ui->left_dropdown->currentText().toStdString();
+  guiResultPublisher.publish(msg);
 }
 
 void
@@ -222,6 +239,11 @@ gesturegui::rightDropdownDown()
 
   ui->right_dropdown->hidePopup();
   rightDropdownIsClicked = false;
+
+  ROS_INFO_STREAM("Publishing current right drop down text");
+  std_msgs::String msg;
+  msg.data = ui->right_dropdown->currentText().toStdString();
+  guiResultPublisher.publish(msg);
 }
 
 void
@@ -243,6 +265,11 @@ gesturegui::rightDropdownUp()
 
   ui->right_dropdown->hidePopup();
   rightDropdownIsClicked = false;
+
+  ROS_INFO_STREAM("Publishing current right drop down text");
+  std_msgs::String msg;
+  msg.data = ui->right_dropdown->currentText().toStdString();
+  guiResultPublisher.publish(msg);
 }
 
 void
@@ -281,6 +308,13 @@ gesturegui::sliderClicked()
   {
     ROS_WARN_STREAM("Slider is not highlighted. Highlight before clicking on the slider.");
     return;
+  }
+
+  if(sliderIsClicked) {
+    ROS_INFO_STREAM("Publishing current slider value");
+    std_msgs::String msg;
+    msg.data = std::to_string(ui->slider->value());
+    guiResultPublisher.publish(msg);
   }
 
   sliderIsClicked=!sliderIsClicked;

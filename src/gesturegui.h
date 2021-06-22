@@ -137,9 +137,14 @@ private:
   Ui::gesturegui *ui;
 
   /**
-   * @brief guiHandler member object for the listener thread
+   * @brief guiHandler object for the listener thread
    */
   guiHandler guiHand;
+
+  /**
+   * @brief Publisher Object to send messages to the gui result topic
+   */
+  ros::Publisher guiResultPublisher;
 
   /**
    * @brief Boolean flag to indicate if the left dropdown menu is highlighted
