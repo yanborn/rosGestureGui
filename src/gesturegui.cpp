@@ -1,3 +1,10 @@
+/**
+ * @file gesturegui.cpp
+ * @brief Source file for gesturegui class
+ *
+ * @author Yannick Volkenborn
+ */
+
 #include "gesturegui.h"
 #include "ui_gesturegui.h"
 
