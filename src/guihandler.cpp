@@ -1,3 +1,10 @@
+/**
+ * @file guihandler.cpp
+ * @brief Source file for guihandler class
+ *
+ * @author Yannick Volkenborn
+ */
+
 #include "gesturegui.h"
 #include "guihandler.h"
 #include "ros/console.h"

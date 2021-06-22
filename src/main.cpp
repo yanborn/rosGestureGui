@@ -1,3 +1,10 @@
+/**
+ * @file main.cpp
+ * @brief Main file to run the gesture gui application
+ *
+ * @author Yannick Volkenborn
+ */
+
 #include "gesturegui.h"
 
 #include <QApplication>
