@@ -185,6 +185,11 @@ private:
    * @brief QString for updating the widget stylesheet to indicate it is not highlighted
    */
   static QString const highlighted;
+
+  /**
+   * @brief QString for updating the widget stylesheet to indicate it is clicked
+   */
+  static QString const clicked;
 };
 
 #endif // GESTUREGUI_H

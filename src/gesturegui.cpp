@@ -25,6 +25,7 @@ bool gesturegui::sliderIsClicked{false};
 
 QString const gesturegui::notHighlighted{"background-color:white"};
 QString const gesturegui::highlighted{"background-color:grey"};
+QString const gesturegui::clicked{"background-color:lightblue"};
 
 gesturegui::gesturegui(int argc, char** argv, QWidget *parent) :
   QMainWindow(parent),
@@ -315,6 +316,10 @@ gesturegui::sliderClicked()
     std_msgs::String msg;
     msg.data = std::to_string(ui->slider->value());
     guiResultPublisher.publish(msg);
+    ui->slider_frame->setStyleSheet(highlighted);
+  }
+  else {
+    ui->slider_frame->setStyleSheet(clicked);
   }
 
   sliderIsClicked=!sliderIsClicked;
