@@ -6,6 +6,7 @@ ROS gesture gui for system integration project
 - [ROS Kinetic Kame](http://wiki.ros.org/kinetic/Installation)
 - Working catkin environment with [catkin workspace](http://wiki.ros.org/ROS/Tutorials)
 - [Qt Version 4.8.7](https://doc.qt.io/archives/qt-4.8/index.html) (Other Versions might also work)
+- [Ros QT Build package](http://wiki.ros.org/qt_build)
 
 ## Required ROS Packages
 - [Openni launch package to get the kinect running](http://wiki.ros.org/openni_launch)
