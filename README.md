@@ -32,6 +32,7 @@ Click on the connect button to connect to the gestureGui topic.
 
 ### Topic name
 - gestureGui _-> Topic to communicate with the GUI_
+- guiResult _-> Topic to publish the chosen GUI values_
 
 ### Supported messages
 The topics which are accepted and handled to control the GUI are the following:
