@@ -23,8 +23,7 @@ Run the following command in your catkin workspace
 The Ros package will be created. Make sure your workspace is setup properly.
 
 ## How to run the package
-A launchfile for this package will follow.
-Currently you have to run the following command
+You have to run the following command
 > rosrun rosgesturegui rosgesturegui_node
 
 ## How to use
@@ -35,7 +34,7 @@ Click on the connect button to connect to the gestureGui topic.
 - guiResult _-> Topic to publish the chosen GUI values_
 
 ### Supported messages
-The topics which are accepted and handled to control the GUI are the following:
+The messages which are accepted and handled to control the GUI are the following:
 - leftHighlighted _-> For highlighting the left drop down menu_
 - leftClicked _-> For clicking on the left drop down menu_
 - rightHighlighted _-> For highlighting the right drop down menu_
